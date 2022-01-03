@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}créer un voyage{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row my-3">
+        <div class="col-12">
+            <h2 class="text-muted text-center">Ajouter un nouvel voyage</h2>
+        </div>
+        <div class="col-6 mx-auto mt-4">
+            {{ form(form, {'attr': {novalidate: 'novalidate'}}) }}
+            {#
+                {{ form_start(form, {'attr': }) }} => <form >
+                {{ form_end(form) }} => </form>
+            #}
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

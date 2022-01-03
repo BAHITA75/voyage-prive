@@ -20,7 +20,7 @@
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 						 {% if not app.user %} 
 
-                                <li><a class="dropdown-item" href="">Inscription</a></li>
+                                <li><a class="dropdown-item" href="{{ path('register') }}">Inscription</a></li>
                                 <li><a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a></li>
 
                             {% else %}
@@ -35,7 +35,7 @@
 				{% if is_granted('ROLE_ADMIN') %}
 
                         <li class="nav-item">
-                            <a class="nav-link" href="">| Administration |</a>
+                            <a class="nav-link" href="{{ path('dashboard') }}">| Administration |</a>
                         </li>
 
                 {% endif %}
