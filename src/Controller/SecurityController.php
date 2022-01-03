@@ -61,7 +61,7 @@ class SecurityController extends AbstractController
                 ->subject($motif)
                 ->text('Sending emails is fun again!')
                 ->htmlTemplate('security/template_email.html.twig');
-            $cid = $email->embedFromPath('uploads/logo.jfif', 'logo');
+            $cid = $email->embedFromPath('uploads/voyagePrive.png', 'logo');
 
             // pass variables (name => value) to the template
             $email->context([
@@ -118,7 +118,7 @@ class SecurityController extends AbstractController
                 ->subject('Demande de réinitialisation de mot de passe')
                 ->text('Sending emails is fun again!')
                 ->htmlTemplate('security/template_email.html.twig');
-            $cid = $email->embedFromPath('uploads/logo.jfif', 'logo');
+            $cid = $email->embedFromPath('uploads/voyagePrive.png', 'logo');
 
             // pass variables (name => value) to the template
             $email->context([
@@ -126,7 +126,7 @@ class SecurityController extends AbstractController
                 'nom' => "",
                 'prenom' => "",
                 'subject' => 'demande de réinitialisation',
-                'from' => 'apple-dont-reply@only.com',
+                'from' => 'service-client@voyage-prive.com',
                 'cid' => $cid,
                 'liens' => 'http://127.0.0.1:8000/resetForm?token=' . $token . '&i=' . $user->getId(),
                 'objectif' => 'Réinitialiser',
@@ -161,7 +161,6 @@ class SecurityController extends AbstractController
                 ]);
 
             else:
-
                 $this->addFlash('danger', 'Une erreur s\'est produite, veuillez réiterer votre demande');
                 return $this->redirectToRoute('resetPassword');
             endif;
