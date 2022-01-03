@@ -19,6 +19,7 @@ class DashboardController extends AbstractController
 
     
     /**
+     * 
      * @Route("/dashboard", name="dashboard")
      */
     public function dashboard(): Response
