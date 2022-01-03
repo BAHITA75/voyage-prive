@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block body %}
+<h1 class="text-bold text-center">Tableau de bord </h1>
+<section class="container">
+<div  class="col-sm-12 col-lg-12 col-xl-12">
+        {% for label, messages in app.flashes %}
+        {% for message in messages %}
+        <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+            {% if label == 'success' %}
+            <span class="alert-inner--icon"><i class="fe fe-thumbs-up"></i></span>
+            {% else %}
+            <span class="alert-inner--icon"><i class="fe fe-thumbs-down"></i></span>
+            {% endif %}
+            <span class="alert-inner--text"><strong>{{ label | title }} : </strong> {{ message | raw }}</span>
+            <button type="button" class="btn btn-primary close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+    <h2 class="text-muted text-center">Les voyages</h2>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Ville de départ</th>
+            <th scope="col">Ville d'arrivée</th>
+            <th scope="col">Description</th>
+            <th scope="col">Date de départ</th>
+            <th scope="col">Date de retour</th>
+            <th scope="col">Durée du séjour</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Action</th>
+
+
+
+
+          </tr>
+        </thead>
+{% endblock %}
