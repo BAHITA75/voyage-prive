@@ -50,6 +50,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $birthdate;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,6 +176,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBirthdate(\DateTimeInterface $birthdate): self
     {
         $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
 
         return $this;
     }
