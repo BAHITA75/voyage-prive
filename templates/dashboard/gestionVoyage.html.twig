@@ -69,10 +69,12 @@
                     </td>
 
                     <td>
-                        <a href="{# {{path('delete_article',{'id': voyage.id })}} #}"
-                            onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"><i
+
+                        <a href="{{path('delete_voyage',{'id': voyage.id })}}"
+                            onclick="return confirm('Voulez-vous vraiment supprimer ce voyage ?')"><i
                                 class="fa fa-trash"></i></a> | <a
-                            href="{# {{path('edit_article',{'id': voyage.id })}} #}"><i class="fa fa-edit"></i></a>
+                            href="{{path('edit_voyage',{'id': voyage.id })}} "><i class="fa fa-edit"></i></a>
+
                     </td>
                 </tr>
                 {% endfor %}
