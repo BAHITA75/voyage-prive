@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="#">Voyage privé</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,12 +43,12 @@
 			{% if app.user %}
                     <div class="text-warning float-right mr-5">Nom : {{ app.user.firstname }} | Rôle : {{ app.user.roles[0] }}</div>
             {% endif %}
-			<div class="float-right">
+			{# <div class="float-right">
 			<form class="d-flex float-right">
 				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 				<button class="btn btn-outline-success" type="submit">Search</button>
 			</form>
-			</div>
+			</div> #}
 		</div>
 	</div>
 

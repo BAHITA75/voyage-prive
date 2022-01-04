@@ -3,74 +3,16 @@
 {% block title %}Hello DashboardController!{% endblock %}
 
 {% block body %}
-<h1 class="text-bold text-center">Tableau de bord </h1>
-<section class="container">
-<div  class="col-sm-12 col-lg-12 col-xl-12">
-        {% for label, messages in app.flashes %}
-        {% for message in messages %}
-        <div class="alert alert-{{ label }} alert-dismissible fade show text-center" role="alert">
-            {% if label == 'success' %}
-            <span class="alert-inner--icon"><i class="fe fe-thumbs-up"></i></span>
-            {% else %}
-            <span class="alert-inner--icon"><i class="fe fe-thumbs-down"></i></span>
-            {% endif %}
-            <span class="alert-inner--text"><strong>{{ label | title }} : </strong> {{ message | raw }}</span>
-        </div>
-        {% endfor %}
-        {% endfor %}
+<main id="main">
+  <div class="mt-5">
+    <h1 class="text-muted text-center py-5">Mon tableau de board</h1>
+    <hr>
+    <div class="mt-4" id="backOffice">
+        <div class="card m-5 bg-warning"><a href="{{path("membre")}}">Gestion des membres</a></div>
+        <div class="card m-5 bg-warning"><a href="{{path("voyage")}}">Gestion des voyages</a></div>
+        <div class="card m-5 bg-warning"><a href="">Gestion des commandes</a></div>
+        <div class="card m-5 bg-warning"><a href="">Gestion des avis</a></div>
     </div>
-    <h2 class="text-muted text-center">Les voyages</h2>
-    <a class="btn d-block mx-auto col-3 btn-success mb-2 mt-5" href="{{path('create_voyage')}}">Ajouter un voyage</a>
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Ville de départ</th>
-            <th scope="col">Destination</th>
-            <th scope="col">Description</th>
-            <th scope="col">Illustration</th>
-            <th scope="col">Date de départ</th>
-            <th scope="col">Date de retour</th>
-            <th scope="col">Durée du séjour</th>
-            <th scope="col">Prix</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-                {% for voyage in voyages %}
-
-
-                    <tr>
-                        <td>{{voyage.id}}</td>
-                        <td>
-                            {{voyage.villedepart}}
-                        </td>
-                        <td>
-                            {{voyage.destination}}
-                        </td>
-                        <td title="{{voyage.description}}">
-                            {{voyage.description | length > 40 ? voyage.description|slice(0, 55) ~ '...' : voyage.description}}
-                        </td>
-
-                        <td><img style="width:100px;" src="{{asset('uploads/' ~ voyage.picture)}}" alt=""></td>
-
-                        <td >
-                            {{voyage.datedepart | date('d/m/Y')}}
-                        </td>
-                        <td >
-                            {{voyage.dateretour | date('d/m/Y')}}
-                        </td>
-                        <td>
-                            {{voyage.dureesejour ~ ' Nuits'}}
-                        </td>
-                        <td>
-                            {{voyage.prix ~ '€' }}
-                        </td>
-                        
-                        <td>
-                            <a href="{# {{path('delete_article',{'id': voyage.id })}} #}" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"><i class="fa fa-trash"></i></a> | <a href="{# {{path('edit_article',{'id': voyage.id })}} #}"><i class="fa fa-edit"></i></a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+  </div>
+</main>
 {% endblock %}
