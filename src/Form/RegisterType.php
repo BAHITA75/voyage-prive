@@ -49,7 +49,7 @@ class RegisterType extends AbstractType
 
             ->add('submit', SubmitType::class, [
                 'label' => 'Inscription',
-                'attr' => ['class' => 'btn btn-sucess d-block mx-auto my-3 col-4']
+                'attr' => ['class' => 'btn btn-warning d-block mx-auto my-3 col-4']
             ]);
     }
         
