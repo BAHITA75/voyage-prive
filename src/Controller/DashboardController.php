@@ -64,4 +64,25 @@ class DashboardController extends AbstractController
            'voyages' => $voyages,
         ]);
     }
+
+    /*********************** SUPRIMMER UN USER ************************/
+    /**
+     * @Route("/admin/supprimer/user/{id}", name="delete_user")
+     * @param User $user
+     * @return Response
+     */
+    public function deleteUser(User $user): Response
+    {
+          $this->entityManager->remove($user);
+          $this->entityManager->flush();
+
+          $this->addFlash('success','L\'utilisateur '. $user->getFirstname() .' a été supprimé !');
+
+          return $this->redirectToRoute('dashboard');
+    }
+
+
+
+
+
 }

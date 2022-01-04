@@ -14,7 +14,8 @@ footer {
     margin-top:56px;
     margin-bottom:110px;
  }
-#imagelivre{
+ 
+/* #imagelivre{
     width: 80px;
     height: 120px;
 }
@@ -29,7 +30,7 @@ footer {
 }
 #imageLivreHome{
     height: 250px;
-}
+} */
 
 #backOffice {
     display:flex;
