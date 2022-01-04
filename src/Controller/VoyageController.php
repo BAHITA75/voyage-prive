@@ -37,7 +37,6 @@ class VoyageController extends AbstractController
             $file = $form->get('picture')->getData(); 
         
             if($file){
-               
                     // $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 
                     $extension = '.' . $file->guessExtension();
@@ -46,9 +45,9 @@ class VoyageController extends AbstractController
                     $safeFilename = $slugger->slug($voyage->getDestination());
                   
                     $newFilename = $safeFilename . '_' . uniqid() . $extension;
-                    
-                    try {
-                       
+                   
+   
+                    try {  
                         $file->move($this->getParameter('uploads_dir'), $newFilename);
                         $voyage->setPicture($newFilename);
                     } catch (FileException $exception) {

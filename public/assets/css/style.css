@@ -1,0 +1,52 @@
+html, body {
+    margin:0;
+    padding:0;
+    
+ }
+footer {
+    bottom:0;  
+    width:100%;
+    height:110px;  
+
+ }
+
+ #main{
+    margin-top:56px;
+    margin-bottom:110px;
+ }
+#imagelivre{
+    width: 80px;
+    height: 120px;
+}
+#imageSingleLivre{
+    width: 300px;
+    height: 350px;
+}
+
+#viewLivre{
+    margin-top: 100px;
+    min-height: 500px;
+}
+#imageLivreHome{
+    height: 250px;
+}
+
+#backOffice {
+    display:flex;
+    justify-content: center;
+}
+
+#backOffice div {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    background-color: rgb(180, 173, 162);
+}
+
+#backOffice a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
