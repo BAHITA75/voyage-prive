@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Voyage;
 use App\Form\VoyageType;
+use App\Form\EditVoyageType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +21,8 @@ class VoyageController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
+
+    /********************************************* AJOUTER UN VOYAGE **************************************************/
     /**
      * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/createVoyage", name="create_voyage")
@@ -59,7 +62,7 @@ class VoyageController extends AbstractController
 
             $this->addFlash('success','Le voyage a été ajouté!');
 
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('voyage');
         }
 
         return $this->render('dashboard/form_voyage.html.twig',[
@@ -68,4 +71,44 @@ class VoyageController extends AbstractController
     }
 
     
+    /***************************************** MODIFIER UN VOYAGE **********************************************/
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/admin/modifier/voyage/{id}", name="edit_voyage")
+     */
+    public function editVoyage(Voyage $voyage, Request $request): Response
+    {
+        $form = $this->createForm(EditVoyageType::class, $voyage)
+        ->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+      
+        $this->entityManager->persist($voyage);
+        $this->entityManager->flush();
+        $this->addFlash('success', 'Le voyage a été supprimé !');
+        return $this->redirectToRoute('voyage');
+    }
+
+    return $this->render('dashboard/edit_voyage.html.twig', [
+        'form' => $form->createView()
+    ]);
+
+    }
+
+
+    /******************************************** SUPRIMMER UN VOYAGE *********************************************/
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/admin/supprimer/voyage/{id}", name="delete_voyage")
+     */
+    public function deleteVoyage(Voyage $voyage): Response
+    {
+        $this->entityManager->remove($voyage);
+        $this->entityManager->flush();
+
+        $this->addFlash('success', 'Le voyage a été supprimé !');
+
+        return $this->redirectToRoute('voyage');
+    }
 }
+

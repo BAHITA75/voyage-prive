@@ -4,15 +4,15 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class RegisterType extends AbstractType
+class EditUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -43,15 +43,12 @@ class RegisterType extends AbstractType
                 'attr' => ['placeholder' => 'Entrez votre Prénom'],
 
                     'widget' => 'single_text', 
-             
             ])
-
             ->add('submit', SubmitType::class, [
-                'label' => 'Inscription',
+                'label' => 'Modifier',
                 'attr' => ['class' => 'btn btn-success d-block mx-auto my-3 col-4']
             ]);
     }
-        
 
     public function configureOptions(OptionsResolver $resolver): void
     {

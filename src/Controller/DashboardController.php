@@ -4,18 +4,23 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Voyage;
+use App\Form\EditUserType;
+use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class DashboardController extends AbstractController
 {
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)
     {
         $this->entityManager = $entityManager;
+        $this->passwordHasher = $passwordHasher;
     }
 
     
@@ -24,34 +29,26 @@ class DashboardController extends AbstractController
      * @Route("/dashboard", name="dashboard")
      */
     public function dashboard(): Response
-    {
-        $voyages = $this->entityManager->getRepository(Voyage::class)->findAll();
-        $user = $this->entityManager->getRepository(User::class)->findAll();
-        
-
-
-        return $this->render('dashboard/dashboard.html.twig', [
-           'voyages' => $voyages,
-           'user' => $user
-        ]);
+    {   
+        return $this->render('dashboard/dashboard.html.twig');
     }
 
+    /************************************* AFFICHAGE DES MEMBRES **********************************/
     /**
      * @IsGranted("ROLE_ADMIN")
      * @Route("/dashboard/gestion-membre", name="membre")
      */
     public function gestionMembre(): Response
-    {
+    {  
+        $users = $this->entityManager->getRepository(User::class)->findAll();
         
-        $user = $this->entityManager->getRepository(User::class)->findAll();
-        
-
         return $this->render('dashboard/gestionMembre.html.twig', [
            
-           'user' => $user
+           'users' => $users
         ]);
     }
 
+    /********************************** AFFICHAGE DES VOYAGES **************************************/
     /**
      * @IsGranted("ROLE_ADMIN")
      * @Route("/dashboard/gestion-voyage", name="voyage")
@@ -65,24 +62,74 @@ class DashboardController extends AbstractController
         ]);
     }
 
-    /*********************** SUPRIMMER UN USER ************************/
+    /************************************ AJOUTER UN USER *******************************************/
     /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("admin/ajouter/user", name="add_user")
+     */
+    public function addUser(Request $request): Response
+    {
+
+        $user = new User();
+        $form = $this->createForm(RegisterType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $user = $form->getData();
+            $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+
+            $this->addFlash('success','L\'utilisateur '. $user->getLastname() .' a été ajouté !');
+            return $this->redirect($request->get('redirect') ?? '/dashboard/gestion-membre');
+        }
+
+        return $this->render('dashboard/form_user.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**************************************** MODOFIER UN USER *****************************************/
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/admin/edit/user/{id}", name="edit_user")
+     */
+    public function editUser($id, Request $request): Response
+    {
+
+        $users = $this->entityManager->getRepository(User::class)->find($id);
+
+        $form = $this->createForm(EditUserType::class, $users);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $users->setPassword($this->passwordHasher->hashPassword($users, $users->getPassword()));
+            $this->entityManager->persist($users);
+            $this->entityManager->flush();
+
+            $this->addFlash('success','L\'utilisateur N° '. $users->getId() .' a été modifié !');
+            return $this->redirect($request->get('redirect') ?? '/dashboard/gestion-membre');
+        }
+        return $this->render('dashboard/edit_user.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /****************************************** SUPRIMMER UN USER *******************************************/
+    /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/supprimer/user/{id}", name="delete_user")
-     * @param User $user
-     * @return Response
      */
     public function deleteUser(User $user): Response
     {
           $this->entityManager->remove($user);
           $this->entityManager->flush();
 
-          $this->addFlash('success','L\'utilisateur '. $user->getFirstname() .' a été supprimé !');
+          $this->addFlash('success','L\'utilisateur N° '. $user->getId() .' a été supprimé !');
 
-          return $this->redirectToRoute('dashboard');
+          return $this->redirectToRoute('membre');
     }
-
-
-
-
 
 }
