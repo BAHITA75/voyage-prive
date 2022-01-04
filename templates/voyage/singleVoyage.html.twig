@@ -8,17 +8,16 @@
 	{% for voyage in singleVoyage %}
 
 		<div class="container-fluid">
-			<div class="row">
+			<div class="row justify-content-evenly align-items-center">
 				<div class="col-md-6">
 					<div class="card">
 						<div class="card-content">
 							<div class="card-body">
-								<img width="600" src="{{ asset('uploads/' ~ voyage.picture)}}" alt="foto">
+								<img width="600px" src="{{ asset('uploads/' ~ voyage.picture)}}" alt="foto">
 							</div>
 						</div>
 					</div>
 				</div>
-
 
 				<div class="col-md-4">
 					<h1 class="text-center">{{voyage.destination}}</h1>
