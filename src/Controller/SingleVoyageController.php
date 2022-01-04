@@ -16,7 +16,7 @@ class SingleVoyageController extends AbstractController
         $this->entityManager=$EntityManager;
     }
     /**
-     * @Route("/single/voyage/{id}", name="single_voyage")
+     * @Route("/view/voyage/{id}", name="single_voyage")
      */
 
     public function singleVoyage($id): Response

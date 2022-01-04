@@ -13,16 +13,15 @@
 					<div class="card">
 						<div class="card-content">
 							<div class="card-body">
-								<img width="600px" src="{{ asset('uploads/' ~ voyage.picture)}}" alt="foto">
+								<img width="580px" src="{{ asset('uploads/' ~ voyage.picture)}}" alt="image">
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<div class="col-md-4">
-					<h1 class="text-center">{{voyage.destination}}</h1>
-					<h2 class="text-center">{{voyage.dureeSejour}}</h2>
-                    <h2 class="text-center">{{voyage.prix}}</h2>
+					<h3 class="text-center">{{voyage.villeDepart}} --> {{voyage.destination}}</h3>
+					<h5 class="text-center">{{voyage.dureeSejour}} nuits / {{voyage.prix}} €</h5>
 					<br><br>
 					<p>{{voyage.description}}</p>
 				</div>
