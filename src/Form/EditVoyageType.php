@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class VoyageType extends AbstractType
+class EditVoyageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -85,21 +85,10 @@ class VoyageType extends AbstractType
                 'label' => 'Prix',
                 'attr' => ['placeholder' => 'Entrez un prix']
             ])
-            ->add('picture',FileType::class, [
-                
-                'label' => 'Photo',
-                'required' => true,
-                'attr' => ['placeholder' => 'Entrez une illustration'],
+            
 
-                'constraints' => [
-                    new Image([
-                        'mimeTypes' => ['image/jpeg', 'image/png'],
-                        'mimeTypesMessage' => 'Les types de fichier autorisés sont : .jpeg / .png'
-                    ])
-                ]
-            ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Ajouter',
+                'label' => 'Modifier',
                 'attr' => ['class' => 'btn btn-warning d-block mx-auto my-3 col-4']
             ]);
         
