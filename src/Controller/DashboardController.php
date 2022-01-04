@@ -25,12 +25,13 @@ class DashboardController extends AbstractController
      */
     public function dashboard(): Response
     {
-        $voyage = $this->entityManager->getRepository(Voyage::class)->findAll();
+        $voyages = $this->entityManager->getRepository(Voyage::class)->findAll();
         $user = $this->entityManager->getRepository(User::class)->findAll();
-
+        
+// dd($voyages);
 
         return $this->render('dashboard/dashboard.html.twig', [
-           'voyage' => $voyage,
+           'voyages' => $voyages,
            'user' => $user
         ]);
     }
