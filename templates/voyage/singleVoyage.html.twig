@@ -1,0 +1,35 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %} Affichage du Voyage - Voyage-Privée {% endblock %}
+
+{% block body %}
+
+	{% for voyage in singleVoyage %}
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-content">
+							<div class="card-body">
+								<img width="600" src="{{ asset('uploads/' ~ voyage.picture)}}" alt="foto">
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-md-4">
+					<h1 class="text-center">{{voyage.destination}}</h1>
+					<h2 class="text-center">{{voyage.dureeSejour}}</h2>
+                    <h2 class="text-center">{{voyage.prix}}</h2>
+					<br><br>
+					<p>{{voyage.description}}</p>
+				</div>
+
+	{% endfor %}
+
+{% endblock %}
+
+
