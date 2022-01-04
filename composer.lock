@@ -7574,6 +7574,7 @@
         },
         {
             "name": "twig/extra-bundle",
+<<<<<<< HEAD
             "version": "v3.3.6",
             "source": {
                 "type": "git",
@@ -7584,6 +7585,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/c275d3f8a799e58a8a5a032e4824245b0f6627fc",
                 "reference": "c275d3f8a799e58a8a5a032e4824245b0f6627fc",
+=======
+            "version": "v3.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/twig-extra-bundle.git",
+                "reference": "e0cc9c35a0650006b0da232a3f749cc060c65d3b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/e0cc9c35a0650006b0da232a3f749cc060c65d3b",
+                "reference": "e0cc9c35a0650006b0da232a3f749cc060c65d3b",
+>>>>>>> 80ca56ae79c09976aca611eba392e53f7a1b8e02
                 "shasum": ""
             },
             "require": {
@@ -7637,7 +7650,11 @@
                 "twig"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.3.6"
+=======
+                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.3.7"
+>>>>>>> 80ca56ae79c09976aca611eba392e53f7a1b8e02
             },
             "funding": [
                 {
@@ -7649,6 +7666,7 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-01-03T13:59:31+00:00"
         },
         {
@@ -7663,6 +7681,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/twigphp/Twig/zipball/bb07a776206c245bc9cbde8e1cfcd47ffa298c23",
                 "reference": "bb07a776206c245bc9cbde8e1cfcd47ffa298c23",
+=======
+            "time": "2022-01-03T21:04:59+00:00"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v3.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "8f168c6ffa3ce76d1786b3cd52275424a3fc675b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/8f168c6ffa3ce76d1786b3cd52275424a3fc675b",
+                "reference": "8f168c6ffa3ce76d1786b3cd52275424a3fc675b",
+>>>>>>> 80ca56ae79c09976aca611eba392e53f7a1b8e02
                 "shasum": ""
             },
             "require": {
@@ -7713,7 +7747,11 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/twigphp/Twig/tree/v3.3.6"
+=======
+                "source": "https://github.com/twigphp/Twig/tree/v3.3.7"
+>>>>>>> 80ca56ae79c09976aca611eba392e53f7a1b8e02
             },
             "funding": [
                 {
@@ -7725,7 +7763,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-01-03T14:27:01+00:00"
+=======
+            "time": "2022-01-03T21:15:37+00:00"
+>>>>>>> 80ca56ae79c09976aca611eba392e53f7a1b8e02
         },
         {
             "name": "webmozart/assert",
