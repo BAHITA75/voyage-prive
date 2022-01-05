@@ -64,6 +64,8 @@ class Voyage
      */
     private $commandes;
 
+    
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
@@ -196,4 +198,6 @@ class Voyage
 
         return $this;
     }
+
+  
 }

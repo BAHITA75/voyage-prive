@@ -35,6 +35,12 @@ class Commande
      */
     private $voyage;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Cart::class, inversedBy="commande")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $cart;
+
     public function __construct()
     {
         $this->voyage = new ArrayCollection();
@@ -89,6 +95,18 @@ class Commande
     public function removeVoyage(Voyage $voyage): self
     {
         $this->voyage->removeElement($voyage);
+
+        return $this;
+    }
+
+    public function getCart(): ?Cart
+    {
+        return $this->cart;
+    }
+
+    public function setCart(?Cart $cart): self
+    {
+        $this->cart = $cart;
 
         return $this;
     }
