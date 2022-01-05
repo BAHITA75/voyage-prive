@@ -4,7 +4,7 @@
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+		<div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
 			<ul class="navbar-nav">
 				
 				<li class="nav-item">
@@ -32,17 +32,21 @@
                             {% endif %}
 					</ul>
 				</li>
-				{% if is_granted('ROLE_ADMIN') %}
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('dashboard') }}">| Administration |</a>
-                        </li>
-
-                {% endif %}
+				
 			</ul>
-			{% if app.user %}
-                    <div class="text-warning float-right mr-5">Nom : {{ app.user.firstname }} | Rôle : {{ app.user.roles[0] }}</div>
-            {% endif %}
+
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					{% if is_granted('ROLE_ADMIN') %}
+                            <a class="nav-link text-warning" href="{{ path('dashboard') }}">| Administration |</a>
+                	{% endif %}
+				</li>
+				<li class="nav-item">
+					{% if app.user %}
+						<a class="nav-link text-warning disabled" href="">Nom : {{ app.user.firstname }} | Rôle : {{ app.user.roles[0] }}</a>
+            		{% endif %}
+				</li>
+			</ul>
 			{# <div class="float-right">
 			<form class="d-flex float-right">
 				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
