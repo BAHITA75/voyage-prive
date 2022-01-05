@@ -21,6 +21,8 @@ class VoyageController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
+
+    /********************************************* AJOUTER UN VOYAGE **************************************************/
     /**
      * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/createVoyage", name="create_voyage")
@@ -67,6 +69,9 @@ class VoyageController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    
+    /***************************************** MODIFIER UN VOYAGE **********************************************/
     /**
      * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/modifier/voyage/{id}", name="edit_voyage")
@@ -80,6 +85,7 @@ class VoyageController extends AbstractController
       
         $this->entityManager->persist($voyage);
         $this->entityManager->flush();
+        $this->addFlash('success', 'Le voyage a été supprimé !');
         return $this->redirectToRoute('voyage');
     }
 
@@ -89,6 +95,8 @@ class VoyageController extends AbstractController
 
     }
 
+
+    /******************************************** SUPRIMMER UN VOYAGE *********************************************/
     /**
      * @IsGranted("ROLE_ADMIN")
      * @Route("/admin/supprimer/voyage/{id}", name="delete_voyage")
@@ -98,7 +106,7 @@ class VoyageController extends AbstractController
         $this->entityManager->remove($voyage);
         $this->entityManager->flush();
 
-        $this->addFlash('success', 'Votre voyage a été supprimé !');
+        $this->addFlash('success', 'Le voyage a été supprimé !');
 
         return $this->redirectToRoute('voyage');
     }
