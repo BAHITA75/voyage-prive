@@ -44,7 +44,7 @@
                 <th>{{commande.voyage.0.prix}}</th>  
                 <td>
                     <a href="{{path('edit_commande',{'id': commande.id})}}"><i class="fa fa-edit"></i></a> |
-                    <a href="{# {{path('delete_user',{'id': user.id})}} #}"><i class="fa fa-trash"></i></a>
+                    <a href="{{path('delete_commande',{'id': commande.id})}}"><i class="fa fa-trash"></i></a>
                 </td>
 
             </tr>

@@ -145,7 +145,7 @@ class DashboardController extends AbstractController
           $this->entityManager->remove($user);
           $this->entityManager->flush();
 
-          $this->addFlash('success','L\'utilisateur N° '. $user->getId() .' a été supprimé !');
+          $this->addFlash('success','L\'utilisateur a été supprimé !');
 
           return $this->redirectToRoute('membre');
     }
@@ -177,4 +177,20 @@ class DashboardController extends AbstractController
         ]);
     }
 
+
+     /**************************************** SUPPRIMER UNE COMMANDE *****************************************/
+
+     /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/admin/supprimer/commande/{id}", name="delete_commande")
+     */
+    public function deleteCommande(Commande $commandes): Response
+    {
+          $this->entityManager->remove($commandes);
+          $this->entityManager->flush();
+
+          $this->addFlash('success','Votre commande a été supprimée !');
+
+          return $this->redirectToRoute('commande');
+    }
 }
