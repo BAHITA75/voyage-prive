@@ -1,12 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil
+{% endblock %}
 
 {% block body %}
+	<div class="container">
+		<div class="row">
+
+			<h1 class="col-12 text-center my-5">Nos voyages</h1>
+
+			{% for voyage in voyage %}
+
+				<div class="col-md-3 my-3">
+					<div class="card" style="width: 18rem; height: 30rem;">
+                    
+						<img src="{{ asset('uploads/' ~ voyage.picture)}}" class="card-img-top img-card-custom" alt="">
+                        
+						<ul class="list-group list-group-flush">{# <li class="list-group-item">Categorie : {{ article.category.name }}</li>
+														                        <li class="list-group-item">Auteur : {{ article.user.lastname ?? '' ~ ' ' ~ article.user.firstname ?? '' }}</li> #}
+							
+						</ul>
+						<div class="card-body">
+							<h5 class="card-title">{{ voyage.villeDepart | length > 20 ? voyage.villeDepart | slice(0, 20) ~ '...' : voyage.villeDepart ~ ' => ' ~ voyage.destination }}</h5>
 
 
+							<p class="card-date">{{'Du ' ~ voyage.datedepart | date('d/M/Y') ~ ' au ' ~ voyage.dateRetour | date('d/M/Y')}}</p>
 
+							<p class="card-text">{{'Durée du séjour ' ~ voyage.dureeSejour ~ ' nuits'  }}</p>
+							<p class="card-text">{{ voyage.description | length > 50 ? voyage.description | slice(0, 50) ~ '...' : voyage.description }}</p>
+							<p class="card-text">{{'Au prix de ' ~ voyage.prix ~ ' €'}}</p>
+							{# <a href="{{ path( 'single_voyage', {'id' : voyage.id} ) }}" class="btn btn-warning d-block mx-auto">Voir les détails</a> #}
+						</div>
+					</div>
+				</div>
 
+			{% endfor %}
+		</div>
+	</div>
 
 
 {% endblock %}

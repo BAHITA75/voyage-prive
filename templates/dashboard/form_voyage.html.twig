@@ -3,6 +3,7 @@
 {% block title %}Créer un voyage{% endblock %}
 
 {% block body %}
+        <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
 
 <div class="container">
     <div class="row my-3">
@@ -12,7 +13,7 @@
         <div class="col-6 mx-auto mt-4">
             {# {{ form(form, {'attr': {novalidate: 'novalidate'}}) }} #}
             
-                {{ form_start(form, {'attr': { class: 'dropzone', id: 'my-awesome-dropzone'} }) }}
+                {{ form_start(form, {'attr': { 'action': '/file-upload', 'class': 'dropzone', 'id': 'my-awesome-dropzone'} }) }}
                 {{ form_row(form.picture) }}
                 {{ form_end(form) }}
            
@@ -21,5 +22,8 @@
     </div>
 </div>
 
-
+ <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+      <script>
+  Dropzone.discover();
+      </script>
 {% endblock %}
