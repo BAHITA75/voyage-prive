@@ -29,7 +29,7 @@
 							<p class="card-text">{{'Durée du séjour ' ~ voyage.dureeSejour ~ ' nuits'  }}</p>
 							<p class="card-text">{{ voyage.description | length > 50 ? voyage.description | slice(0, 50) ~ '...' : voyage.description }}</p>
 							<p class="card-text">{{'Au prix de ' ~ voyage.prix ~ ' €'}}</p>
-							{# <a href="{{ path( 'single_voyage', {'id' : voyage.id} ) }}" class="btn btn-warning d-block mx-auto">Voir les détails</a> #}
+							<a href="{{ path( 'single_voyage', {'id' : voyage.id} ) }}" class="btn btn-warning d-block mx-auto">Voir les détails</a>
 						</div>
 					</div>
 				</div>
