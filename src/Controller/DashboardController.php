@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
 use App\Entity\User;
 use App\Entity\Voyage;
+use App\Form\EditCommandeType;
 use App\Form\EditUserType;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -59,6 +61,22 @@ class DashboardController extends AbstractController
         
         return $this->render('dashboard/gestionVoyage.html.twig', [
            'voyages' => $voyages,
+        ]);
+    }
+
+    /********************************** AFFICHAGE DES COMMANDES **************************************/
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/dashboard/gestion-commandes", name="commande")
+     */
+    public function gestionCommande(): Response
+    {
+        $commandes = $this->entityManager->getRepository(Commande::class)->findAll();
+        
+        // dd($commandes);
+        
+        return $this->render('dashboard/gestionCommandes.html.twig', [
+           'commandes' => $commandes,
         ]);
     }
 
@@ -130,6 +148,33 @@ class DashboardController extends AbstractController
           $this->addFlash('success','L\'utilisateur N° '. $user->getId() .' a été supprimé !');
 
           return $this->redirectToRoute('membre');
+    }
+
+    /**************************************** MODOFIER UNE COMMANDE *****************************************/
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/admin/edit/commande/{id}", name="edit_commande")
+     */
+    public function editCommande(Commande $commandes, Request $request): Response
+    {
+  
+
+        $form = $this->createForm(EditCommandeType::class, $commandes);
+        $form->handleRequest($request);
+        $commandes->getDateenregistrement(new \DateTime());
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $commandes->setDateenregistrement(new \DateTime());
+            $this->entityManager->persist($commandes);
+            $this->entityManager->flush();
+
+            $this->addFlash('success','La commande N° '. $commandes->getId() .' a été modifié !');
+            return $this->redirect($request->get('redirect') ?? '/dashboard/gestion-commandes');
+        }
+        return $this->render('dashboard/edit_commande.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
 }
