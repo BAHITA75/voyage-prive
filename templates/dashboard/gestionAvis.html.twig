@@ -20,20 +20,21 @@
             {% endfor %}
             {% endfor %}
         </div>
-        <h2 class="text-muted text-center">Les commandes</h2>
-        <a class="btn d-block mx-auto col-3 btn-success mb-2 mt-5" href="{# {{path('add_user')}} #}">Ajouter une commande</a>
+        <h2 class="text-muted text-center">Les commentaires</h2>
+       
         <table class="table">
             <thead>
                 <tr>
                 <th scope="col">Id</th>
-                <th scope="col">voyage</th>
-                <th scope="col">user</th>            
-                <th scope="col">Date d'enregistrement</th>
-                <th scope="col">Prix</th>              
+                <th scope="col">Auteur</th>
+                <th scope="col">Voyage</th>            
+                <th scope="col">Date de création</th>
+                <th scope="col">Date de modification</th>
+                <th scope="col">Date de suppression</th>             
                 <th scope="col">Actions</th>
                 </tr>
             </thead>
-           <tbody>
+           {# <tbody>
             {% for commande in commandes %}
             <tr>
                 <th>{{commande.id}}</th>
@@ -50,8 +51,8 @@
             </tr>
             {% endfor %}
         </tbody>
-            </tbody>
-        </table>
+            </tbody>#}
+        </table> 
     </section>
 </main>
 {% endblock %}
