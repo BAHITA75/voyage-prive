@@ -19,52 +19,53 @@ class Cart
      */
     private $id;
 
-    
     /**
-     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="cart")
+     * @ORM\ManyToOne(targetEntity=Voyage::class, inversedBy="cart")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $voyage;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="cart")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $commande;
 
-    public function __construct()
-    {
-        $this->voyage = new ArrayCollection();
-        $this->commande = new ArrayCollection();
-    }
-
+    
+    
+    
+   
     public function getId(): ?int
     {
         return $this->id;
     }
 
-  
+    public function getVoyage(): ?Voyage
+    {
+        return $this->voyage;
+    }
 
-    /**
-     * @return Collection|Commande[]
-     */
-    public function getCommande(): Collection
+    public function setVoyage(?Voyage $voyage): self
+    {
+        $this->voyage = $voyage;
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commande
     {
         return $this->commande;
     }
 
-    public function addCommande(Commande $commande): self
+    public function setCommande(?Commande $commande): self
     {
-        if (!$this->commande->contains($commande)) {
-            $this->commande[] = $commande;
-            $commande->setCart($this);
-        }
+        $this->commande = $commande;
 
         return $this;
     }
 
-    public function removeCommande(Commande $commande): self
-    {
-        if ($this->commande->removeElement($commande)) {
-            // set the owning side to null (unless already changed)
-            if ($commande->getCart() === $this) {
-                $commande->setCart(null);
-            }
-        }
+  
+  
 
-        return $this;
-    }
+   
 }

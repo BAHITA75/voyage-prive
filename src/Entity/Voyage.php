@@ -60,16 +60,20 @@ class Voyage
     private $picture;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Commande::class, mappedBy="voyage")
+     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="voyage")
      */
-    private $commandes;
-
-    
+    private $cart;
 
     public function __construct()
     {
-        $this->commandes = new ArrayCollection();
+        $this->cart = new ArrayCollection();
     }
+
+   
+
+    
+
+ 
 
     public function getId(): ?int
     {
@@ -173,31 +177,35 @@ class Voyage
     }
 
     /**
-     * @return Collection|Commande[]
+     * @return Collection|Cart[]
      */
-    public function getCommandes(): Collection
+    public function getCart(): Collection
     {
-        return $this->commandes;
+        return $this->cart;
     }
 
-    public function addCommande(Commande $commande): self
+    public function addCart(Cart $cart): self
     {
-        if (!$this->commandes->contains($commande)) {
-            $this->commandes[] = $commande;
-            $commande->addVoyage($this);
+        if (!$this->cart->contains($cart)) {
+            $this->cart[] = $cart;
+            $cart->setVoyage($this);
         }
 
         return $this;
     }
 
-    public function removeCommande(Commande $commande): self
+    public function removeCart(Cart $cart): self
     {
-        if ($this->commandes->removeElement($commande)) {
-            $commande->removeVoyage($this);
+        if ($this->cart->removeElement($cart)) {
+            // set the owning side to null (unless already changed)
+            if ($cart->getVoyage() === $this) {
+                $cart->setVoyage(null);
+            }
         }
 
         return $this;
     }
+
 
   
 }
