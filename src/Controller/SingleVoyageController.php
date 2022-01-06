@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Voyage;
+use App\Entity\Commentaire;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,14 +21,17 @@ class SingleVoyageController extends AbstractController
      * @Route("/view/voyage/{id}", name="single_voyage")
      */
 
-    public function singleVoyage($id): Response
+    public function singleVoyage($id, Voyage $voyage, User $user): Response
 
     {
+       
         $singleVoyage = $this->entityManager->getRepository(Voyage::class)->findBy(['id' => $id]);
-
+        $commentaire = $this->entityManager->getRepository(Commentaire::class)->findBy(['voyage' => $voyage->getId()]);
+        // dd($commentaire);
         return $this->render('voyage/singleVoyage.html.twig', [
-
+            
             'singleVoyage' => $singleVoyage,
+            'commentaire' => $commentaire,
         ]);
     }
 }

@@ -35,6 +35,33 @@
 
 			</div>
 		</div>
-	{% endfor %}
 
+
+		{{render(url('commentaire', {'id': voyage.id}))}}
+
+
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-5 col-md-6 col-12 pb-4">
+						<h1>Commentaires</h1>
+						{% if commentaire is not null %}
+							{% for commentary in commentaire %}
+								<div class="comment mt-4 text-justify float-left">
+									<img src="/images/images.png" alt="" class="rounded-circle" width="40" height="40">
+
+									<h4>{{commentary.user.lastname ~ ' ' ~ commentary.user.firstname }}</h4>
+									
+									<span>{{commentary.createdAt | date('d/m/Y')}}</span>
+									<br>
+									<p>{{ commentary.comment }}</p>
+								</div>
+							{% endfor %}
+						{% endif %}
+					</div>
+
+				</div>
+			</div>
+		</section>
+	{% endfor %}
 {% endblock %}

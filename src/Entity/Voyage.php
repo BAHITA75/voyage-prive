@@ -64,9 +64,15 @@ class Voyage
      */
     private $cart;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="voyage")
+     */
+    private $commentaires;
+
     public function __construct()
     {
         $this->cart = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
    
@@ -200,6 +206,36 @@ class Voyage
             // set the owning side to null (unless already changed)
             if ($cart->getVoyage() === $this) {
                 $cart->setVoyage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commentaire[]
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setVoyage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getVoyage() === $this) {
+                $commentaire->setVoyage(null);
             }
         }
 
