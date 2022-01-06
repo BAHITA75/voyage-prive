@@ -74,7 +74,7 @@ class DashboardController extends AbstractController
     {
         $commandes = $this->entityManager->getRepository(Commande::class)->findAll();
         
-        // dd($commandes);
+        //dd($commandes);
         
         return $this->render('dashboard/gestionCommandes.html.twig', [
            'commandes' => $commandes,
@@ -223,7 +223,7 @@ class DashboardController extends AbstractController
           $this->entityManager->remove($commentaires);
           $this->entityManager->flush();
 
-          $this->addFlash('success','Votre commentaire a été supprimée !');
+          $this->addFlash('success','Le commentaire a été supprimée !');
 
           return $this->redirectToRoute('commentaire');
     }

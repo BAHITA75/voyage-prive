@@ -37,7 +37,7 @@ class CommentaireController extends AbstractController
             $entityManager->flush();
 
 
-            $this->addFlash('success', 'Vous avez commenté le voyage ');
+            // $this->addFlash('success', 'Vous avez commenté le voyage ');
             return $this->redirectToRoute('single_voyage',[
                 'id'=>$voyage->getId()
             ]);

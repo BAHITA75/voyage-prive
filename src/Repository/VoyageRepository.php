@@ -8,7 +8,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Voyage|null find($id, $lockMode = null, $lockVersion = null)
- * @method Voyage|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Voyage|null findOneBy(array $criteria, array $orderBy = null) 
  * @method Voyage[]    findAll()
  * @method Voyage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -47,4 +47,5 @@ class VoyageRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }
