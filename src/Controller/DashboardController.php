@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Commande;
+use App\Entity\Commentaire;
 use App\Entity\User;
 use App\Entity\Voyage;
 use App\Form\EditCommandeType;
@@ -77,6 +78,22 @@ class DashboardController extends AbstractController
         
         return $this->render('dashboard/gestionCommandes.html.twig', [
            'commandes' => $commandes,
+        ]);
+    }
+
+      /********************************** AFFICHAGE DES COMMENTAIRES **************************************/
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/dashboard/gestion-commentaires", name="commentary")
+     */
+    public function gestionCommentaires(): Response
+    {
+        $commentaires = $this->entityManager->getRepository(Commentaire::class)->findAll();
+        
+        // dd($commandes);
+        
+        return $this->render('dashboard/gestionAvis.html.twig', [
+           'commentaires' => $commentaires,
         ]);
     }
 
@@ -192,5 +209,22 @@ class DashboardController extends AbstractController
           $this->addFlash('success','Votre commande a été supprimée !');
 
           return $this->redirectToRoute('commande');
+    }
+
+
+  /**************************************** SUPPRIMER UN COMMENTAIRE *****************************************/
+
+     /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/admin/supprimer/commentaire/{id}", name="delete_commentaire")
+     */
+    public function deleteCommentaire(Commentaire $commentaires): Response
+    {
+          $this->entityManager->remove($commentaires);
+          $this->entityManager->flush();
+
+          $this->addFlash('success','Votre commentaire a été supprimée !');
+
+          return $this->redirectToRoute('commentaire');
     }
 }
