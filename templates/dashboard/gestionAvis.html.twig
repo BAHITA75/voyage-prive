@@ -26,32 +26,37 @@
             <thead>
                 <tr>
                 <th scope="col">Id</th>
+                <th class="text-center" scope="col">Commentaire</th> 
                 <th scope="col">Auteur</th>
                 <th scope="col">Voyage</th>            
-                <th scope="col">Date de création</th>
+                <th scope="col">Date de publication</th>
                 <th scope="col">Date de modification</th>
                 <th scope="col">Date de suppression</th>             
                 <th scope="col">Actions</th>
                 </tr>
             </thead>
-           {# <tbody>
-            {% for commande in commandes %}
+           <tbody>
+            {% for commentaire in commentaires %}
             <tr>
-                <th>{{commande.id}}</th>
-                <td>{{commande.cart.0.voyage.villedepart ~ ' => ' ~ commande.cart.0.voyage.destination}}</td>
+                <th>{{commentaire.id}}</th>
+                <td title="{{commentaire.comment}}">
+                        {{commentaire.comment | length > 40 ? commentaire.comment|slice(0, 55) ~ '...' :
+                        commentaire.comment}}
+                    </td>
+                <td>{{commentaire.user.fullname}}</td>
+                <td>{{commentaire.voyage.destination}}</td>
                 
-                <td>{{commande.user.lastname ~ ' ' ~ commande.user.firstname}}</td>
-                <td>{{commande.dateenregistrement | date('d/m/Y')}}</td>
-                <th>{{commande.cart.0.voyage.prix}}</th>  
+                <td>{{commentaire.createdAt | date('d/m/Y')}}</td>
+                <td>{# {{commentaire.updatedAt | date('d/m/Y')}} #}</td>
+                <td> {# {{commentaire.deletedAt | date('d/m/Y')}} #}</td>
                 <td>
-                    <a href="{{path('edit_commande',{'id': commande.id})}}"><i class="fa fa-edit"></i></a> |
-                    <a href="{{path('delete_commande',{'id': commande.id})}}"><i class="fa fa-trash"></i></a>
+                    <a href="{{path('delete_commentaire',{'id': commentaire.id})}}"><i class="fa fa-trash"></i></a>
                 </td>
 
             </tr>
             {% endfor %}
         </tbody>
-            </tbody>#}
+            </tbody>
         </table> 
     </section>
 </main>

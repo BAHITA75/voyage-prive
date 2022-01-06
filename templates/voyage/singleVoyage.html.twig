@@ -19,34 +19,24 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="col-md-4">
 					<h3 class="text-center">{{voyage.villeDepart}}
-						-->
 						{{voyage.destination}}</h3>
-					<h5 class="text-center">{{voyage.dureeSejour}}
-						nuits /
-						{{voyage.prix}}
-						€</h5>
+					<h5 class="text-center">{{voyage.dureeSejour ~ ' nuits / ' ~ voyage.prix ~ ' €' }} </h5>
 					<br><br>
 					<p>{{voyage.description}}</p>
+					<a href="{{ path('addCart', {id: voyage.id, route : 'fullCart'}) }}" class="btn btn-success col-4 d-block mx-auto mt-5">Réserver</a>			
 				</div>
-
-
 			</div>
 		</div>
-
-
 		{{render(url('commentaire', {'id': voyage.id}))}}
-
-
 		<section>
 			<div class="container">
-				<div class="row">
-					<div class="col-sm-5 col-md-6 col-12 pb-4">
-						<h1>Commentaires</h1>
 						{% if commentaire is not null %}
+						<h1 class="text-dark text-center" id="avis">Avis</h1>
+						<div class="row">
 							{% for commentary in commentaire %}
+							<div class="col-md-6 pb-4">
 								<div class="comment mt-4 text-justify float-left">
 									<img src="/images/images.png" alt="" class="rounded-circle" width="40" height="40">
                                     {% if commentary.user %}
@@ -57,11 +47,11 @@
 									<span>{{commentary.createdAt | date('d/m/Y')}}</span>
 									<br>
 									<p>{{ commentary.comment }}</p>
+										<a href="{{path('delete_commentaire',{'id': commentary.id})}}" class="d-block float-end mb-2"><i class="fa fa-trash text-warning"></i></a>
 								</div>
+							</div>
 							{% endfor %}
 						{% endif %}
-					</div>
-
 				</div>
 			</div>
 		</section>
