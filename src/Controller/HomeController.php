@@ -36,7 +36,6 @@ class HomeController extends AbstractController
      */
     public function addCart($id, PanierService $panierService, $route)
     {
-      
         $panierService->add($id);
         $panierService->getFullCart();
 
@@ -47,7 +46,6 @@ class HomeController extends AbstractController
             $this->addFlash('success', 'produit ajouté au panier');
             return $this->redirectToRoute('fullCart');
         endif;
-
     }
 
     /**
@@ -58,8 +56,6 @@ class HomeController extends AbstractController
     {
         $panierService->delete($id);
         return $this->redirectToRoute('fullCart');
-
-
     }
 
     /**
@@ -69,9 +65,6 @@ class HomeController extends AbstractController
      */
     public function fullCart(PanierService $panierService,  $param = null)
     {
-
-
-
         $fullCart = $panierService->getFullCart();
 
         $total=$panierService->getTotal();
@@ -79,46 +72,37 @@ class HomeController extends AbstractController
         return $this->render('home/fullCart.html.twig', [
             'fullCart' => $fullCart,
             'total'=>$total
-
-
         ]);
-
- 
-   }
+    }
 
    /**
      *
      * @Route("/finalOrder", name="finalOrder")
-     *
      */
-    public function order( PanierService $panierService, EntityManagerInterface $manager)
+    public function order(PanierService $panierService, EntityManagerInterface $manager)
     {
-
-
-
             $commandes = new Commande();
             $commandes->setDateenregistrement(new \DateTime())->setUser($this->getUser());
             $panier = $panierService->getFullCart();
 
-//            $delivery=new Delivery();
-//
-//            $delivery->setOrder($order)->setStreet($request->request->get('street'));
-//
-//                $manager->persist($delivery);
+//          $delivery=new Delivery();
+//          $delivery->setOrder($order)->setStreet($request->request->get('street'));
+//          $manager->persist($delivery);
 
             foreach ($panier as $item):
 
                 $cart = new Cart();
+                $cart->setCommande($commandes)->setVoyage($item['voyage']);
                 $manager->persist($cart);
+                
+            
                 $panierService->delete($item['voyage']->getId());
+            
             endforeach;
             $manager->persist($commandes);
             $manager->flush();
+            
             $this->addFlash('success', "Merci pour votre achat");
             return $this->redirectToRoute('home');
-
-
-
-
     }
 }

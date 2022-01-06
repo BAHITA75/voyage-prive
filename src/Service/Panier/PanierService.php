@@ -30,7 +30,19 @@ class PanierService
 
         $this->session->set('panier', $panier);
     }
- 
+
+    public function remove(int $id)
+    {
+        $panier = $this->session->get('panier', []);
+
+        if (!empty($panier[$id]) && $panier[$id] !== 1):
+            $panier[$id]--;
+        else:
+            unset($panier[$id]);  //$this->session->remove($panier[$id])
+        endif;
+
+        $this->session->set('panier', $panier);
+    }
 
     public function delete(int $id)
     {
@@ -43,23 +55,20 @@ class PanierService
         $this->session->set('panier', $panier);
     }
 
-
     public function getFullCart(): array
     {
-        
         $panier = $this->session->get('panier', []);
 
         $panierDetail = [];
 
-        foreach ($panier as $id):
-
+        foreach ($panier as $id => $indice):
+            // dd($panier);
             $panierDetail[]=[
                 'voyage'=>$this->voyageRepository->find($id),
                 
             ];
 
         endforeach;
-        // dd($panierDetail);
         return $panierDetail;
     }
 
@@ -69,8 +78,8 @@ class PanierService
         // dd($panier, );
 
         $total=0;
-        foreach ($panier as $value):
-            
+        foreach ($panier as $item => $value):
+            // dump($item, $value);
             // dd($value['product']);
             $total += $value['voyage']->getPrix();  
         endforeach;
@@ -78,6 +87,4 @@ class PanierService
         // dd($total);
         return $total;
     }
-
-
 }

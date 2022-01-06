@@ -178,7 +178,7 @@ class DashboardController extends AbstractController
     }
 
 
-     /**************************************** SUPPRIMER UNE COMMANDE *****************************************/
+    /**************************************** SUPPRIMER UNE COMMANDE *****************************************/
 
      /**
      * @IsGranted("ROLE_ADMIN")

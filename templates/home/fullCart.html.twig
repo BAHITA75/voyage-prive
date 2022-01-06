@@ -24,20 +24,20 @@
 				                           class="btn btn-danger">Supprimer</a>
 				                    </td>
 				                </tr>
-				            {% endfor %}
+				{% endfor %}
 			</tbody>
 		</table>
 
 
-		{# {% if total is defined %}
+		{% if total is defined %}
 		            <h2><strong>Montant Total: </strong>{{ total }} €<br></h2>
-		        {% endif %}
+		    {% endif %}
 		
 		        {% if app.user %}
-		        <a href="{{ path('delivery', {id: total}) }}" class="btn btn-warning">Valider le panier</a>
+		        <a href="{{ path('finalOrder', {id: total}) }}" class="btn btn-warning">Valider le panier</a>
 		            {% else %}
 		                <a href="{{ path('app_login') }}" class="btn btn-success">Connectez-vous pour continuer</a>
-		        {% endif %} #}
+		        {% endif %}
 </div>
 	{% endblock %}
 
