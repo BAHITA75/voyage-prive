@@ -21,13 +21,14 @@ class SingleVoyageController extends AbstractController
      * @Route("/view/voyage/{id}", name="single_voyage")
      */
 
-    public function singleVoyage($id, Voyage $voyage, User $user): Response
+    public function singleVoyage($id, Voyage $voyage): Response
 
     {
        
         $singleVoyage = $this->entityManager->getRepository(Voyage::class)->findBy(['id' => $id]);
-        $commentaire = $this->entityManager->getRepository(Commentaire::class)->findBy(['voyage' => $voyage->getId()]);
-        // dd($commentaire);
+        // dd($singleVoyage);
+        $commentaire = $this->entityManager->getRepository(Commentaire::class)->findBy(['voyage' => $voyage]);
+        //  dd($commentaire);
         return $this->render('voyage/singleVoyage.html.twig', [
             
             'singleVoyage' => $singleVoyage,
