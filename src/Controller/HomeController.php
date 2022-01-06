@@ -92,11 +92,16 @@ class HomeController extends AbstractController
             foreach ($panier as $item):
 
                 $cart = new Cart();
+                $cart->setCommande($commandes)->setVoyage($item['voyage']);
                 $manager->persist($cart);
+                
+            
                 $panierService->delete($item['voyage']->getId());
+            
             endforeach;
             $manager->persist($commandes);
             $manager->flush();
+            
             $this->addFlash('success', "Merci pour votre achat");
             return $this->redirectToRoute('home');
     }
