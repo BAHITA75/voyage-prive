@@ -71,7 +71,7 @@ class PanierService
         $total=0;
         foreach ($panier as $value):
             
-            // dd($value['product']);
+            // dd($value['voyage']);
             $total += $value['voyage']->getPrix();  
         endforeach;
 

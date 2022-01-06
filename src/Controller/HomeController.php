@@ -79,7 +79,7 @@ class HomeController extends AbstractController
      *
      * @Route("/finalOrder", name="finalOrder")
      */
-    public function order( PanierService $panierService, EntityManagerInterface $manager)
+    public function order(PanierService $panierService, EntityManagerInterface $manager)
     {
             $commandes = new Commande();
             $commandes->setDateenregistrement(new \DateTime())->setUser($this->getUser());
