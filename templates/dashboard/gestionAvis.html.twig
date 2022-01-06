@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block body %}
+<main id="main">
+    <h1 class="text-bold text-center">Tableau de bord </h1>
+    <section class="container">
+        <div class="col-sm-12 col-lg-12 col-xl-12">
+            {% for label, messages in app.flashes %}
+            {% for message in messages %}
+            <div class="alert alert-{{ label }} alert-dismissible fade show text-center" role="alert">
+                {% if label == 'success' %}
+                <span class="alert-inner--icon"><i class="fe fe-thumbs-up"></i></span>
+                {% else %}
+                <span class="alert-inner--icon"><i class="fe fe-thumbs-down"></i></span>
+                {% endif %}
+                <span class="alert-inner--text"><strong>{{ label | title }} : </strong> {{ message | raw }}</span>
+            </div>
+            {% endfor %}
+            {% endfor %}
+        </div>
+        <h2 class="text-muted text-center">Les commentaires</h2>
+       
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Voyage</th>            
+                <th scope="col">Date de création</th>
+                <th scope="col">Date de modification</th>
+                <th scope="col">Date de suppression</th>             
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+           {# <tbody>
+            {% for commande in commandes %}
+            <tr>
+                <th>{{commande.id}}</th>
+                <td>{{commande.cart.0.voyage.villedepart ~ ' => ' ~ commande.cart.0.voyage.destination}}</td>
+                
+                <td>{{commande.user.lastname ~ ' ' ~ commande.user.firstname}}</td>
+                <td>{{commande.dateenregistrement | date('d/m/Y')}}</td>
+                <th>{{commande.cart.0.voyage.prix}}</th>  
+                <td>
+                    <a href="{{path('edit_commande',{'id': commande.id})}}"><i class="fa fa-edit"></i></a> |
+                    <a href="{{path('delete_commande',{'id': commande.id})}}"><i class="fa fa-trash"></i></a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+            </tbody>#}
+        </table> 
+    </section>
+</main>
+{% endblock %}
