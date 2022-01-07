@@ -1,20 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccountController!{% endblock %}
+{% block title %}Account
+{% endblock %}
 
 {% block body %}
+	<div class="container d-flex justify-content-between">
+		<h3 class="mt-4">Bienvenue
+			<span class="text-muted">{{app.user.lastname}}
+				{{app.user.firstname }}</span>
+		</h3>
+		<a class="card-link btn btn-warning mt-4" href="{{path('resetPassword')}}">Modifier mon mot de passe</a>
+	</div>
+	<hr>
 
-<div class="container">
-    <div class="navbar navbar navbar-expand-md ">
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <h4 class="me-auto">Compte</h4>
-            <a style="text-decoration: none;" href="{{path('app_logout')}}">Se déconnecter</a>
-        </div>
-    </div>
-    <hr>
-    </br>
-    </br>
-    <h2>Bonjour {{app.user.firstname}},</h2>
-</div>
 
-{% endblock %}
+	<section>
+		<div class="container">
+			<h2 class="text-muted text-center">Les commandes</h2>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Numero de commande</th>
+						<th scope="col">voyage</th>
+						<th scope="col">Date d'enregistrement</th>
+						<th scope="col">Prix</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for commande in commandes %}
+						<tr>
+							<th>{{commande.id}}</th>
+							<td>{{commande.cart.0.voyage.villedepart ~ ' => ' ~ commande.cart.0.voyage.destination}}</td>
+							<td>{{commande.dateenregistrement | date('d/m/Y')}}</td>
+							<th>{{commande.cart.0.voyage.prix}}</th>
+							<td>
+								<a href="{{path('delete_commande',{'id': commande.id})}}">Annuler</a>
+							</td>
+
+						</tr>
+					{% endfor %}
+				</tbody>
+			</tbody>
+		</table>
+	</div>
+</section>{% endblock %}
