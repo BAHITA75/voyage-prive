@@ -24,9 +24,7 @@ class AccountController extends AbstractController
         
         return $this->render('account/account.html.twig', [
             'commandes' => $commandes,
-         ]);
-
-     
-}
+         ]);    
+    }
 
 }

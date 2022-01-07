@@ -103,7 +103,6 @@ class SecurityController extends AbstractController
         $user = $repository->findOneBy(['email' => $request->request->get('email')]);
 
         if ($user):
-
             $token = uniqid();
             $user->setToken($token);
             $manager->persist($user);
@@ -139,8 +138,6 @@ class SecurityController extends AbstractController
 
             return $this->redirectToRoute('resetPassword');
         endif;
-
-
     }
 
     /**
@@ -161,12 +158,7 @@ class SecurityController extends AbstractController
                 $this->addFlash('danger', 'Une erreur s\'est produite, veuillez réiterer votre demande');
                 return $this->redirectToRoute('resetPassword');
             endif;
-
-
         endif;
-
-
-
     }
 
     /**

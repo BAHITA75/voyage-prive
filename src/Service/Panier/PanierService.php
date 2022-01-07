@@ -15,7 +15,6 @@ class PanierService
     {
         $this->session = $session;
         $this->voyageRepository = $voyageRepository;
-
     }
 
     public function add(int $id)
