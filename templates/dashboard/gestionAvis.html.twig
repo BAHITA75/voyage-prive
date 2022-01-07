@@ -43,7 +43,12 @@
                         {{commentaire.comment | length > 40 ? commentaire.comment|slice(0, 55) ~ '...' :
                         commentaire.comment}}
                     </td>
-                <td>{{commentaire.user.fullname}}</td>
+                
+                 {% if commentaire.user %}
+								<td>{{commentaire.user.fullname}}</td>
+									{% else %}
+									<h4>Inconnue</h4>
+									{% endif %}
                 <td>{{commentaire.voyage.destination}}</td>
                 
                 <td>{{commentaire.createdAt | date('d/m/Y')}}</td>
