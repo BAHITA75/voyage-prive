@@ -29,14 +29,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for commande in commandes %}
+					{% for commande in myCart %}
 						<tr>
-							<th>{{commande.id}}</th>
-							<td>{{commande.cart.0.voyage.villedepart ~ ' => ' ~ commande.cart.0.voyage.destination}}</td>
-							<td>{{commande.dateenregistrement | date('d/m/Y')}}</td>
-							<th>{{commande.cart.0.voyage.prix}}</th>
+					
+							<th>{{commande.voyage.cart.0.id}}</th>
+							<td>{{commande.voyage.cart.0.voyage.villedepart ~ ' => ' ~ commande.voyage.cart.0.voyage.destination}}</td>
+							<td>{{commande.voyage.cart.0.commande.dateenregistrement | date('d/m/Y')}}</td>
+							<th>{{commande.voyage.cart.0.voyage.prix}}</th>
 							<td>
-								<a href="{{path('delete_commande',{'id': commande.id})}}">Annuler</a>
+								
 							</td>
 						</tr>
 					{% endfor %}
