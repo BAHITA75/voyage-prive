@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
 use App\Entity\Commande;
+use App\Service\Panier\PanierService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,12 +20,13 @@ class AccountController extends AbstractController
     /**
      * @Route("/account", name="account")
      */
-    public function account(): Response
+    public function account(PanierService $cart): Response
     {
         $commandes = $this->entityManager->getRepository(Commande::class)->findAll();
-        
+     
         return $this->render('account/account.html.twig', [
             'commandes' => $commandes,
+            'myCart'=> $cart->getFullCart()
          ]);
 
      
