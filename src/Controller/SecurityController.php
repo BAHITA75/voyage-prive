@@ -79,9 +79,6 @@ class SecurityController extends AbstractController
 
 
             return $this->redirectToRoute("home");
-
-
-
         endif;
 
         return $this->render('security/form_email.html.twig');
@@ -197,5 +194,4 @@ class SecurityController extends AbstractController
             ]);
         endif;
     }
-
 }
